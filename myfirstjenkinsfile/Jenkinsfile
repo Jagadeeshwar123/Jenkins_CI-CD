@@ -1,10 +1,12 @@
 pipeline {
-    agent any
-    stages {
-        stage('Run Docker') {
-            steps {
-                bat 'docker run -v "C:/ProgramData/Jenkins/.jenkins/workspace:/workspace" my-image echo Hello from container'
-            }
-        }
+  agent {
+    docker { image 'node:16-alpine' }
+  }
+  stages {
+    stage('Test') {
+      steps {
+        sh 'node --version'
+      }
     }
+  }
 }
